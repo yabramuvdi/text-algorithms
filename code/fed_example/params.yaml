@@ -1,0 +1,4 @@
+---
+# general parameters
+seed: 92
+test_size: 0.2
