@@ -82,6 +82,8 @@ for text in tqdm(df_test["text"]):
     all_responses.append(classify_response(result))
 
 # append data to existing dataframe
-df_test["gpt_response"] = all_responses
-df_test[["ID", "gpt_response"]].to_csv(output_path + f"fed_tagged_{params['llm_openai_model']}.csv", index=False)
+df_test["predictions"] = all_responses
+df_test = df_test[["ID", "predictions"]] 
+df_test.to_csv(output_path + f"fed_tagged_{params['llm_openai_model']}.csv", index=False)
+
 # %%

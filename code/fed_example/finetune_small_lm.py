@@ -121,5 +121,7 @@ print(final_metrics)
 
 # save a dataframe with the predictions
 df_test["ft_bert"] = results[1]
-df_test[["ID", "ft_bert"]].to_csv(output_path + "fed_tagged_slm.csv", index=False)
+df_test = df_test[["ID", "ft_bert"]] 
+df_test.columns = ["ID", "predictions"]
+df_test.to_csv(output_path + f"fed_tagged_{model_name}.csv", index=False)
 # %%
