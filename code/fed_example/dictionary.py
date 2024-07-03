@@ -1,10 +1,16 @@
+"""
+Implements a dictionary-based approach using regular expressions to
+search for the presence of certain terms in the text. Assigns a label
+to the text based on the results of the dictionary search.
+"""
+
 #%%
 
 import pandas as pd
 import re
 import string
 
-# import custom module
+# import custom modules
 import sys
 sys.path.insert(1, '../utils/')
 from dictionary_methods import Dictionary

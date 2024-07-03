@@ -2,3 +2,6 @@
 # general parameters
 seed: 92
 test_size: 0.2
+# parameters for logistic regression
+num_cv: 5
+max_dtm_features: 2000
