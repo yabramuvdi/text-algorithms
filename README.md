@@ -1,4 +1,4 @@
-# text-algorithms
+# text-algorithms-benchmarking
 Python implementation of multiple text as data methods and benchmarking on publicly available datasets. Below a brief description of the data and the main methods demonstrated.
 
 ## Data
