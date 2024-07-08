@@ -27,7 +27,7 @@ model_name = params["slm_name"]
 
 #%%
 
-# read train and test data 
+# read train and test data
 df_finetune = pd.read_csv(data_path + "fed_train.csv", 
                           dtype={'sentiment': 'category'})
 df_test = pd.read_csv(data_path + "fed_test.csv",
@@ -117,11 +117,21 @@ trainer.save_model(models_path)
 results = trainer.predict(tokenized_test)
 final_metrics = results[2]
 print(final_metrics)
+
 # %%
 
 # save a dataframe with the predictions
 df_test["ft_bert"] = results[1]
 df_test = df_test[["ID", "ft_bert"]] 
-df_test.columns = ["ID", "predictions"]
-df_test.to_csv(output_path + f"fed_tagged_{model_name}.csv", index=False)
+df_test.columns = ["ID", "prediction"]
+
+#%%
+
+if "/" in model_name:
+    clean_name = model_name.split("/")[1]
+else:
+    clean_name = model_name
+
+
+df_test.to_csv(output_path + f"fed_tagged_{clean_name}.csv", index=False)
 # %%

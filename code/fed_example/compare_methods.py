@@ -51,15 +51,17 @@ for method in all_names:
 all_num_params = {'dictionary': 1,
                 'gpt-3.5-turbo-0125': 175000000000,
                 'gpt-4o': 1000000000000,
+                "gemini-1.5-flash": 600000000000,
                 'lr': 1200,
-                'slm': 120000000
+                'distilbert-base-uncased': 66000000
                   }
 
 all_clean_names = {'dictionary': 'Dictionary',
                 'gpt-3.5-turbo-0125': 'GPT-3.5',
                 'gpt-4o': "GPT-4o",
+                "gemini-1.5-flash": "Gemini 1.5",
                 'lr': "Logistic Regression",
-                'slm': "DistilBert"
+                'distilbert-base-uncased': "DistilBert"
                   }
 
 
@@ -67,6 +69,35 @@ df_plot = pd.DataFrame([all_accuracies, all_num_params, all_clean_names]).T
 df_plot.columns = ["accuracy", "num_params", "clean_name"]
 df_plot["error_rate"] = 1 - df_plot['accuracy']
 df_plot
+
+#%%
+
+# check which methods are dominated by others
+all_dominations = []
+for method1 in df_plot.index:
+    print(f"================== Comparing {method1} =====================")
+    dominated = False
+    method1_data = df_plot.loc[method1]
+    num_params1 = method1_data["num_params"]
+    error_rate1 = method1_data["error_rate"]
+    for method2 in df_plot.index:
+        if method2 != method1:
+            method2_data = df_plot.loc[method2]
+            num_params2 = method2_data["num_params"]
+            error_rate2 = method2_data["error_rate"]
+            # compare the number of parameters
+            if (num_params2 < num_params1) and (error_rate2 < error_rate1):
+                print(f"{method1} is dominated by {method2}")
+                dominated = True
+                break
+    if not dominated:
+        print(f"{method1} is not dominated by any other method")
+    
+    all_dominations.append(dominated)
+                
+df_plot["dominated"] = all_dominations
+df_plot
+
 # %%
 
 

@@ -23,7 +23,6 @@ with open("params.yaml") as stream:
 #%%
 
 with open(keys_path + 'openai_api.txt', 'r') as file:
-    # Read the content of the file
     api_key = file.read()
 
 # initialize a client using the API key
@@ -82,8 +81,8 @@ for text in tqdm(df_test["text"]):
     all_responses.append(classify_response(result))
 
 # append data to existing dataframe
-df_test["predictions"] = all_responses
-df_test = df_test[["ID", "predictions"]] 
+df_test["prediction"] = all_responses
+df_test = df_test[["ID", "prediction"]] 
 df_test.to_csv(output_path + f"fed_tagged_{params['llm_openai_model']}.csv", index=False)
 
 # %%

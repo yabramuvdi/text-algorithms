@@ -1,6 +1,13 @@
 # text-algorithms
-Python implementation of multiple text as data methods and benchmarking on publicly available datasets. Below a brief description of the main methods demonstrated.
+Python implementation of multiple text as data methods and benchmarking on publicly available datasets. Below a brief description of the data and the main methods demonstrated.
 
+## Data
+
+### Economic Policy Uncertainty
+
+- Labeled articles available [here](https://www.dropbox.com/scl/fo/ixpmqrf7tjt2yqg6ijt5i/AClnRfN1jbyxzi-XwCDLnuo?rlkey=8yhva58g7262kp62f5ngjq64u&dl=0)
+
+## Methods
 
 ## 1. Dicitonary methods
 

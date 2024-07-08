@@ -188,13 +188,13 @@ print(f"Document-term matrix created with shape: {dt_matrix_test.shape}")
 #=============================
 
 y_hat_test = lr_opt.predict(dt_matrix_test)
-df_test["predictions"] = y_hat_test
+df_test["prediction"] = y_hat_test
 print("Accuracy score in test data: ", accuracy_score(df_test["label"], df_test["predictions"]))
 
 #%%
 
 # save results
-df_test = df_test[["ID", "predictions"]] 
+df_test = df_test[["ID", "prediction"]] 
 df_test.to_csv(output_path + "fed_tagged_lr.csv", index=False)
 
 # %%

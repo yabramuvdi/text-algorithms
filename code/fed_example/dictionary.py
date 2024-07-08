@@ -113,7 +113,7 @@ print(f"Accuracy of Dictionary: {dict_accuracy}")
 
 #### save results
 df_test = df_test[["ID", "dictionary"]] 
-df_test.columns = ["ID", "predictions"]
+df_test.columns = ["ID", "prediction"]
 df_test.to_csv(output_path + "fed_tagged_dictionary.csv", index=False)
 
 # %%
