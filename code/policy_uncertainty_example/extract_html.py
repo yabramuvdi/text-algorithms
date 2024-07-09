@@ -155,6 +155,7 @@ articles = df_complete["unique_id_current"].values
 #     articles = file.read().split(", ")
 
 unique_articles = pd.unique(articles)
+
 if len(articles) != len(unique_articles):
     duplicates = articles.tolist()
     for article in unique_articles:
@@ -162,14 +163,14 @@ if len(articles) != len(unique_articles):
     print(f"{len(duplicates)} DUPLICATED ARTICLES:", end=" ")
     print(*duplicates, sep=", ")
 
-n_articles_expected = len(articles)
+n_articles_expected = len(unique_articles)
 
 articles_not_found = []
 articles_blank = []
 
 print(f"expecting {n_articles_expected} articles")
 
-for i, article in enumerate(articles):
+for i, article in enumerate(unique_articles):
 
     file_path = articles_path + article + ".html"
 
@@ -223,7 +224,7 @@ if articles_not_found or articles_blank:
 else:
     print(f"all {n_articles_expected} articles extracted")
 
-all_text_df = pd.DataFrame(data={"article": articles,
+all_text_df = pd.DataFrame(data={"article": unique_articles,
                                  "text": all_text})
 all_text_df.to_csv(output_df_path + "policy_uncertainty_extracted.csv")
 
