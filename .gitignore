@@ -4,6 +4,9 @@ my_env/
 # trained models
 models/
 
+# data
+labeled_articles/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

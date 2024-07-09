@@ -10,3 +10,4 @@ openai==1.35.9
 seaborn==0.13.2
 beautifulsoup4==4.12.3
 lxml==5.2.2
+anthropic==0.30.1
