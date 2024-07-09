@@ -8,10 +8,11 @@ max_dtm_features: 2000
 # parameters for small language model finetuning
 slm_name: distilbert/distilbert-base-uncased
 slm_learning_rate: 3e-5
-slm_epochs: 2
+slm_epochs: 3
 # parameters for LLMs
 llm_max_tokens: 15
 llm_temperature: 0
 llm_openai_model: gpt-4o  # gpt-3.5-turbo-0125
 llm_google_model: gemini-1.5-flash
 llm_anthropic_model: claude-3-5-sonnet-20240620
+llm_meta_model: meta-llama/Meta-Llama-3-8B-Instruct

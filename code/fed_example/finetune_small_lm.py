@@ -69,7 +69,7 @@ training_args = TrainingArguments(output_dir=models_path,
                                   num_train_epochs=params["slm_epochs"],                 
                                   per_device_train_batch_size=8,
                                   per_device_eval_batch_size=8,
-                                  evaluation_strategy="no",
+                                  eval_strategy="no",
                                   save_strategy="no")
 
 #%%
@@ -85,9 +85,9 @@ def compute_metrics(eval_pred):
     logits, labels = eval_pred
     predictions = np.argmax(logits, axis=-1)
 
-    precision = metric1.compute(predictions=predictions, references=labels, average="micro")["precision"]
-    recall = metric2.compute(predictions=predictions, references=labels, average="micro")["recall"]
-    f1 = metric3.compute(predictions=predictions, references=labels, average="micro")["f1"]
+    precision = metric1.compute(predictions=predictions, references=labels, average="macro")["precision"]
+    recall = metric2.compute(predictions=predictions, references=labels, average="macro")["recall"]
+    f1 = metric3.compute(predictions=predictions, references=labels, average="macro")["f1"]
     accuracy = metric4.compute(predictions=predictions, references=labels)["accuracy"]
 
     return {"precision": precision, "recall": recall,
@@ -115,13 +115,14 @@ trainer.save_model(models_path)
 
 # evaluate final model on the test dataset
 results = trainer.predict(tokenized_test)
+predictions = np.argmax(results.predictions, axis=-1)
 final_metrics = results[2]
 print(final_metrics)
 
 # %%
 
 # save a dataframe with the predictions
-df_test["ft_bert"] = results[1]
+df_test["ft_bert"] = predictions
 df_test = df_test[["ID", "ft_bert"]] 
 df_test.columns = ["ID", "prediction"]
 

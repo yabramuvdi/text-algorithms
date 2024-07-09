@@ -64,21 +64,20 @@ def classify_response(result):
 
 # process all examples
 all_responses = []
-for text in tqdm(df_test["text"].sample(2)):
+for text in tqdm(df_test["text"]):
     my_prompt = generation_prompt(text)
     response = client.messages.create(
         model=params["llm_anthropic_model"],
         max_tokens=100,
         temperature=params["llm_temperature"],
-        system="You are a research assistant working for the Fed. You have a degree in Economics.",
+        system="You are a research assistant working for the Fed. You have a degree in Economics. Reply only with a JSON file.",
         messages=[
             {"role": "user",
              "content": my_prompt,
             },
-            
             ],
         )
-    result = response.content
+    result = response.content[0].text
     all_responses.append(classify_response(result))
 
 #%%
@@ -87,6 +86,5 @@ for text in tqdm(df_test["text"].sample(2)):
 df_test["prediction"] = all_responses
 df_test = df_test[["ID", "prediction"]] 
 df_test.to_csv(output_path + f"fed_tagged_{params['llm_anthropic_model']}.csv", index=False)
-
 
 #%%
