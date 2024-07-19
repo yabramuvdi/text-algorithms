@@ -4,15 +4,13 @@
 #%%
 
 import pandas as pd
-import numpy as np
-import yaml
-import os
 from bs4 import BeautifulSoup 
 
+
 # main paths
-data_path = "../../data/"
-articles_path = "../../../EPU/All Audit Hard Copies/All Audit Hard Copies/Modern/labeled_articles/"
-output_df_path = "../../../policy_uncertainty_extracted/"
+LABELS_FILE = "../../data/epu_modern_labels.csv"
+ARTICLES_PATH = "../../../EPU_data/raw_articles/Modern/labeled_articles/"
+OUTPUT_PATH = "../../../EPU_data/extracted_articles/"
 
 
 def get_text_paras(article_content) -> str:
@@ -137,10 +135,11 @@ def get_text_nyt(soup: BeautifulSoup) -> str:
 
     return ""
 
+
 #%%
 
 # load labels
-df_complete = pd.read_csv(data_path + "epu_modern_labels.csv")
+df_complete = pd.read_csv(LABELS_FILE)
 
 #%%
 
@@ -172,7 +171,7 @@ print(f"expecting {n_articles_expected} articles")
 
 for i, article in enumerate(unique_articles):
 
-    file_path = articles_path + article + ".html"
+    file_path = ARTICLES_PATH + article + ".html"
 
     try:
         # Open the HTMl file and read its contents
@@ -226,6 +225,6 @@ else:
 
 all_text_df = pd.DataFrame(data={"article": unique_articles,
                                  "text": all_text})
-all_text_df.to_csv(output_df_path + "policy_uncertainty_extracted.csv")
+all_text_df.to_csv(OUTPUT_PATH + "epu_modern_text.csv")
 
 # %%
