@@ -33,6 +33,8 @@ df_master = df_master.loc[df_master["vintage"] == "Current"]
 # key column is EPU and ID is a comination of article number and year
 df_master = df_master[["article_number", "year", "month", "EPU"]]
 
+#%%
+
 # get unique label as a majority vote
 df_master = df_master.groupby(["article_number", "year", "month"], as_index=False).mean()
 

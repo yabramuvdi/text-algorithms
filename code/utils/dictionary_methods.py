@@ -63,7 +63,7 @@ class Dictionary:
 
         return df
 
-    def gen_multiple_word_regex(text):
+    def gen_multiple_word_regex(self, text):
         """Craft a regular expression that matches any combination of hyphens 
            and white spaces separating the words in a dictionary term
         """
@@ -95,7 +95,7 @@ class Dictionary:
                 dict_regex += term + r"|"
             
             else:
-                dict_regex += self.gen_multiple_word_regex(term) + r"|"
+                dict_regex += self.gen_multiple_word_regex(row.terms) + r"|"
         
         if self.ignore_case:
             dict_regex = re.compile(dict_regex[:-1], re.IGNORECASE)
