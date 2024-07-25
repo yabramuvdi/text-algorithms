@@ -53,7 +53,6 @@ def process_articles(articles_path: str, output_path: str, n_articles_expected: 
         extracted_text["article_num"].append(i)
         extracted_text["text"].append(text)
 
-
     if filenames:
         # Some filenames remaining in the list - weren't all read in
         logger.info("following files in the folder weren't read in:")
@@ -85,7 +84,6 @@ logger.info("processing historical oversample articles...")
 process_articles("../../../EPU_data/raw_articles/Historical Oversample/labeled_articles/",
                  "../../../EPU_data/extracted_articles/epu_historical_oversample_text.parquet",
                  960)
-
 
 # # TESTING
 # filename = "1.xml"
